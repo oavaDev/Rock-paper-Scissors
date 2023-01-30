@@ -48,6 +48,8 @@ body{
   align-items: center;
   background-color: rgb(255, 255, 255);
   flex-direction: column;
+  min-height: 3rem;
+  justify-content: center;
 }
 .Header__label  span{
   margin: -0.2rem;
@@ -86,6 +88,7 @@ body{
 
 .Game button{
   width: 10.2rem;
+  min-height: 12.2rem;
   background-color: transparent;
   border : none;
 }
@@ -103,4 +106,36 @@ body{
   text-align: center;
   color: white;
   font-size: 3rem;
+}
+
+
+
+
+@media only screen and (min-width: 800px) {
+  .Header__title{
+    font-size: 2rem;
+  }
+  .Header__label{
+    display: flex;
+    width: 4rem;
+    padding:2rem;
+    border-radius: 0.5rem;
+    font-family: "Barlow Semibold";
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    flex-direction: column;
+    min-height: 3rem;
+    justify-content: center;
+  }
+  .Header__label  span{
+    font-size: 1.2rem;
+  }
+  .Header__label span:last-child{
+    font-size: 3rem;
+  }
+  
+.Game button{
+  width: 16.2rem;
+  min-height: 20.2rem;
+}
 }

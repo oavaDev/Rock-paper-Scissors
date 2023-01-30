@@ -56,7 +56,7 @@ function App() {
     }
     setTimeout(() => {
       setHomeValue('');
-    }, 4000);
+    }, 2000);
   };
   return (
     <div className='App'>
