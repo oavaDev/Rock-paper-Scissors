@@ -1,4 +1,3 @@
-import { off } from 'process';
 import React from 'react';
 import './App.css';
 import Select from './components/Select';
@@ -33,18 +32,27 @@ function App() {
     setUserValue(value);
     if (value === 'Rock' && hValue === 'Scissors') {
       console.log('User wins!');
+      setUserWon(true);
+      setIsDraw(false);
       setPoints(points + 1);
     } else if (value === 'Paper' && hValue === 'Rock') {
       console.log('User wins!');
-
+      setUserWon(true);
+      setIsDraw(false);
       setPoints(points + 1);
     } else if (value === 'Scissors' && hValue === 'Paper') {
       console.log('User wins!', value, hValue);
+      setUserWon(true);
+      setIsDraw(false);
       setPoints(points + 1);
     } else if (value === hValue) {
       console.log("It's a tie.");
+      setIsDraw(true);
+      setUserWon(false);
     } else {
       console.log('Home wins');
+      setUserWon(false);
+      setIsDraw(false);
     }
     setTimeout(() => {
       setHomeValue('');
@@ -99,6 +107,11 @@ function App() {
                 </button>
                 <p>THE HOUSE PICKED</p>
               </div>
+            </div>
+            <div className='Selected__win'>
+              {userWon && 'YOU WIN'}
+              {!userWon && !isDraw && 'YOU LOSE'}
+              {isDraw && "IT'S A DRAW"}
             </div>
           </>
         )}
