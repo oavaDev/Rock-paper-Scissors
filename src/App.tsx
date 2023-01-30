@@ -3,10 +3,20 @@ import './App.css';
 import Select from './components/Select';
 
 function App() {
-  const retrievedPoints = JSON.parse(localStorage.getItem('points') || '');
+  const retrievedPoints = localStorage.getItem('points');
+  let parsedPoints: number | null = null;
+
+  if (retrievedPoints) {
+    try {
+      parsedPoints = JSON.parse(retrievedPoints);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   const [userValue, setUserValue] = React.useState<string>('');
   const [homeValue, setHomeValue] = React.useState<string>('');
-  const [points, setPoints] = React.useState<number>(retrievedPoints);
+  const [points, setPoints] = React.useState<number>(parsedPoints || 0);
   const [isDraw, setIsDraw] = React.useState<boolean>(false);
   const [userWon, setUserWon] = React.useState<boolean>(false);
 
@@ -14,7 +24,6 @@ function App() {
     localStorage.setItem('points', JSON.stringify(points));
   }, [points]);
 
-  
   const getHomeValue = () => {
     const auxhomeValue = Math.floor(Math.random() * 3);
     if (auxhomeValue === 0) {
@@ -37,26 +46,21 @@ function App() {
     const hValue = getHomeValue();
     setUserValue(value);
     if (value === 'Rock' && hValue === 'Scissors') {
-      console.log('User wins!');
       setUserWon(true);
       setIsDraw(false);
       setPoints(points + 1);
     } else if (value === 'Paper' && hValue === 'Rock') {
-      console.log('User wins!');
       setUserWon(true);
       setIsDraw(false);
       setPoints(points + 1);
     } else if (value === 'Scissors' && hValue === 'Paper') {
-      console.log('User wins!', value, hValue);
       setUserWon(true);
       setIsDraw(false);
       setPoints(points + 1);
     } else if (value === hValue) {
-      console.log("It's a tie.");
       setIsDraw(true);
       setUserWon(false);
     } else {
-      console.log('Home wins');
       setUserWon(false);
       setIsDraw(false);
     }
