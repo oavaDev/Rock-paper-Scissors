@@ -3,12 +3,18 @@ import './App.css';
 import Select from './components/Select';
 
 function App() {
+  const retrievedPoints = JSON.parse(localStorage.getItem('points') || '');
   const [userValue, setUserValue] = React.useState<string>('');
   const [homeValue, setHomeValue] = React.useState<string>('');
-  const [points, setPoints] = React.useState<number>(0);
+  const [points, setPoints] = React.useState<number>(retrievedPoints);
   const [isDraw, setIsDraw] = React.useState<boolean>(false);
   const [userWon, setUserWon] = React.useState<boolean>(false);
 
+  React.useEffect(() => {
+    localStorage.setItem('points', JSON.stringify(points));
+  }, [points]);
+
+  
   const getHomeValue = () => {
     const auxhomeValue = Math.floor(Math.random() * 3);
     if (auxhomeValue === 0) {
